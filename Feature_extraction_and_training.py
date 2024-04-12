@@ -76,9 +76,12 @@ normalized_features = scaler.fit_transform(all_features)
 X_train, X_test, y_train, y_test = train_test_split(normalized_features, all_labels, test_size=0.2, random_state=42)
 
 # Train MLP classifier
-mlp_classifier = MLPClassifier(hidden_layer_sizes=(15,), activation='logistic', solver='lbfgs', random_state=42)
+mlp_classifier = MLPClassifier(hidden_layer_sizes=(15,), activation='logistic', solver='lbfgs', random_state=42, verbose=1)
 mlp_classifier.fit(X_train, y_train)
+accuracy = mlp_classifier.score(X_test, y_test)
+print("Accuracy of trained MLP classifier is:", accuracy)
 
+print
 # Save the trained classifier
 import joblib
 joblib.dump(mlp_classifier, 'mlp_classifier.pkl')
